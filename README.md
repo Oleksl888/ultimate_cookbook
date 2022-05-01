@@ -1,20 +1,28 @@
 # Lost_and_found
 Final product is the website were user can create ads for items that they have lost or that they have found. 
+
 Key features:
+
 Website must be able to display three differen instances based on the user:
+
 Guest - display the index page without login. No input is allowed from the user, read-only version
 User - abilities of Guest version + user can create ads, edit exisiting ads, view the phone numbers in other ads, send messages to other users
 Admin - abilities of User + can delete the ads of other users, can block the account of other users, can see the admin panel which shows totals of how many visits there has been to the website, list of all users with different statistics.
 
 -Database schema-:
+
 Table users:
 USER ID - Unique, Username - Unique, Email - Unique, Phone - Unique, Password - Unique, Admin - True/False, First Name, Last Name.
+
 Table ads:
 USER ID - Unique(reference USER ID - link to users table), AD ID - Unique, AD Title NOT NULL(SET maximum symbols), AD BODY NOT NULL(SET maximum symbols), AD CATEGORY - (link to another table), AD Location - (Link to another table - use API), AD BLOB for storing images (1 per user for now)
+
 Table Category:
 CATEGORY ID, CATEGORY NAME
+
 Table Location:
 Location ID, Location Name
+
 Table statistics:
 USER ID, number of Sign Ins, number of ads created total, number of active ads, number of deleted ads
 -Maybe just use sql requsts to get statistics on admin panel
@@ -38,6 +46,7 @@ Function must check username/password are matching. If info is correct - update 
 
 Website features:
 No Login: 
+
 Display index with top10 most recent ads
 Search by name 
 View ads by categories
