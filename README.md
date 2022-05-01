@@ -74,7 +74,7 @@ Function to disable account
 --Edit Ad--:
 
 Website server must be created
-
+template for html must be created - Bootstrap used 
 
 
 
