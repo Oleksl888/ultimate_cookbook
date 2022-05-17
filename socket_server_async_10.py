@@ -2,7 +2,6 @@ import socket
 import asyncio
 import datetime
 from html_loader import html_request_response
-import re
 
 
 async def server_run():
@@ -38,6 +37,6 @@ async def request_handle(client):
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.create_task(server_run())
-    loop.run_forever()
+    task = loop.create_task(server_run())
+    loop.run_until_complete(task)
 

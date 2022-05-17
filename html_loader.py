@@ -40,7 +40,7 @@ def make_search(keyword):
     recepies = {}
     cookdb = extract_recepies(read_csv('cookbook.csv'))
     for key, value in cookdb.items():
-        if keyword in key or keyword in value:
+        if keyword.lower() in key.lower() or keyword.lower() in value.lower():
             recepies[key] = value
     return recepies
 
@@ -52,23 +52,27 @@ def html_request_response(received):
     headers += "Content-Type: text/html; charset=utf-8\r\n"
     headers += "\r\n"
     if method[0] == 'GET':
-        html_body = f"<html><body>{make_html_table(extract_recepies(read_csv('cookbook.csv')))}</body></html>"
-        if page[0] == '/':
+        if page[0] == '/' or page[0] == '/index.html':
             with open('pages/index.html') as file:
                 response = file.read()
+            html_body = f"{make_html_table(extract_recepies(read_csv('cookbook.csv')))}</body>"
+            newdata = re.split('</body>', response)
+            data = headers + newdata[0] + html_body + newdata[1] + '\r\n\r\n'
+            print(data)
         else:
             with open('pages' + page[0]) as file:
                 response = file.read()
-        newdata = re.split('</body>', response)
-        data = headers + newdata[0] + html_body + '<body>' + newdata[1] + '\r\n\r\n'
+            data = headers + response + '\r\n\r\n'
+            print(data)
     elif method[0] == 'POST':
         posted_data = re.findall('search=(\S+)', received)
         lookup_word = posted_data[0]
-        html_body = f"<html><body>{make_html_table(make_search(lookup_word))}</body></html>"
+        html_body = f"{make_html_table(make_search(lookup_word))}</body>"
         with open('pages' + page[0]) as file:
             response = file.read()
         newdata = re.split('</body>', response)
-        data = headers + newdata[0] + html_body + '<body>' + newdata[1] + '\r\n\r\n'
+        data = headers + newdata[0] + html_body + newdata[1] + '\r\n\r\n'
+        print(data)
     return data
 
 
