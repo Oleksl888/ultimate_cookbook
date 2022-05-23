@@ -29,6 +29,8 @@ async def request_handle(client):
             client.close()
         else:
             received = received.decode()
+            with open('received.txt', 'w') as file:
+                file.write(received)
             print(received)
             result = html_request_response(received)
             await loop.sock_sendall(client, result.encode())

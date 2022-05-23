@@ -30,6 +30,13 @@ tr:nth-child(even) {
         <th><a href="/feedback.html" title="Leave some feedback">Feedback</a></th>
     </tr>
 </table>
-We will have feedback here
+<h2>Leave your feedback in the form below</h2>
+<form action="/feedback.html" method="post">
+  <label for="name">Enter your name here:</label><br>
+  <input type="text" id="name" name="fname" value="Alex"><br>
+  <label for="msg">Enter message and it will be displayed on site:</label><br>
+  <textarea id="msg" name="msg" rows="10" cols="30">Some text here</textarea><br><br>
+  <input type="submit" value="Submit">
+</form>
 </body>
 </html>
