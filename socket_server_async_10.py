@@ -1,6 +1,7 @@
 import socket
 import asyncio
 import datetime
+from html_loader import html_request_response
 
 
 async def server_run():
@@ -9,7 +10,7 @@ async def server_run():
     print('http://127.0.0.1:8888')
     while True:
         print('Waiting for connection...')
-        mysocket.listen(5)
+        mysocket.listen(1)
         try:
             sock_client, address = await loop.sock_accept(mysocket)
             print(f'Connected to {address} at {datetime.datetime.now()}')
@@ -28,18 +29,16 @@ async def request_handle(client):
             client.close()
         else:
             received = received.decode()
+            with open('received.txt', 'w') as file:
+                file.write(received)
             print(received)
-            data = "HTTP/1.1 200 OK\r\n"
-            data += "Content-Type: text/html; charset=utf-8\r\n"
-            data += "\r\n"
-            data += f"<html><body>Hello World</body></html>\r\n\r\n"
-            print(data)
-            await loop.sock_sendall(client, data.encode())
+            result = html_request_response(received)
+            await loop.sock_sendall(client, result.encode())
             client.close()
 
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.create_task(server_run())
-    loop.run_forever()
+    task = loop.create_task(server_run())
+    loop.run_until_complete(task)
 

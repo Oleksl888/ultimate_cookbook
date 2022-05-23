@@ -1,0 +1,4 @@
+{"fname": "Alex", "msg": "Some+text+here", "msg_date": "23-May-2022, 14:49:10"}
+{"fname": "Alex", "msg": "anyone+here%3F", "msg_date": "23-May-2022, 14:49:22"}
+{"fname": "Alex", "msg": "question+marks+do+not+display+correctly", "msg_date": "23-May-2022, 14:49:37"}
+{"fname": "Alex", "msg": "Pictures+do+not+load+from+file+-+only+from+API", "msg_date": "23-May-2022, 14:49:50"}
